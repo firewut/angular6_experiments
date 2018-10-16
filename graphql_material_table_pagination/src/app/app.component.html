@@ -1,0 +1,59 @@
+<div *ngIf="loading">
+  Loading...
+</div>
+<div *ngIf="error">
+  Error :(
+</div>
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.type }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="isOn">
+    <mat-header-cell *matHeaderCellDef> IsOn </mat-header-cell>
+    <mat-cell *matCellDef="let row">  <mat-checkbox [checked]='row.siOn'></mat-checkbox> </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="docsAmountMonthFetcher">
+    <mat-header-cell *matHeaderCellDef> Docs Fetched </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.docsAmountMonthFetcher }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="sourceId">
+    <mat-header-cell *matHeaderCellDef> SourceId </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.sourceId }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="domainDomainByDomainId.name">
+    <mat-header-cell *matHeaderCellDef> Domain </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.domainDomainByDomainId.name }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="forLenta">
+    <mat-header-cell *matHeaderCellDef> ForLenta </mat-header-cell>
+    <mat-cell *matCellDef="let row"> <mat-checkbox [checked]='row.forLenta'></mat-checkbox> </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="forMainPage">
+    <mat-header-cell *matHeaderCellDef> ForMainPage </mat-header-cell>
+    <mat-cell *matCellDef="let row"> <mat-checkbox [checked]='row.forMainPage'></mat-checkbox> </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.name }}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator 
+  [length]="totalCount"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="pageEvent = onPaginateChange($event)"
+></mat-paginator>
